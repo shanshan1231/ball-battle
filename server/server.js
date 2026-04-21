@@ -7,7 +7,35 @@ const express = require('express');
 const http = require('http');
 const WebSocket = require('ws');
 const path = require('path');
+const fs = require('fs');
 const Game = require('./Game');
+const adminRouter = require('./admin');
+
+// ==================== 配置加载 ====================
+const CONFIG_PATH = path.join(__dirname, '../config.json');
+let gameConfig = null;
+
+function loadConfig() {
+    try {
+        const data = fs.readFileSync(CONFIG_PATH, 'utf8');
+        gameConfig = JSON.parse(data);
+        console.log('[配置] 已加载配置文件');
+        return gameConfig;
+    } catch (e) {
+        console.error('[配置] 加载配置文件失败:', e.message);
+        return null;
+    }
+}
+
+function getConfig() {
+    if (!gameConfig) {
+        loadConfig();
+    }
+    return gameConfig;
+}
+
+// 加载配置
+loadConfig();
 
 // ==================== 服务器初始化 ====================
 
@@ -15,8 +43,15 @@ const app = express();
 const server = http.createServer(app);
 const wss = new WebSocket.Server({ server });
 
+app.use(express.json());
 app.use(express.static(path.join(__dirname, '../public')));
 app.use('/image', express.static(path.join(__dirname, '../image')));
+
+// 管理后台页面
+app.use('/admin', express.static(path.join(__dirname, '../admin')));
+
+// 管理API路由
+app.use('/api', adminRouter);
 
 // ==================== WebSocket 通信 ====================
 
