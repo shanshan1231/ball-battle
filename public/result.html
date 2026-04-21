@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>小球对战擂台 - 战斗结果</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <div class="result-container">
+        <div class="result-content">
+            <!-- 结果标题 -->
+            <h1 class="result-title" id="resultTitle">对战结束</h1>
+
+            <!-- 胜负显示 -->
+            <div class="result-display">
+                <div class="winner-section">
+                    <div class="winner-ball" id="winnerBall"></div>
+                    <h2 id="winnerName">胜利者</h2>
+                    <p class="winner-label">🏆 胜利 🏆</p>
+                </div>
+
+                <div class="vs-divider">VS</div>
+
+                <div class="loser-section">
+                    <div class="loser-ball" id="loserBall"></div>
+                    <h2 id="loserName">失败者</h2>
+                    <p class="loser-label">💀 战败</p>
+                </div>
+            </div>
+
+            <!-- 操作按钮 -->
+            <div class="result-buttons">
+                <button id="restartBtn" class="btn btn-primary">
+                    🔄 重新对战
+                </button>
+                <button id="selectNewBtn" class="btn btn-secondary">
+                    🎯 重新选角色
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <script src="js/result.js"></script>
+</body>
+</html>

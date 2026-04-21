@@ -1,0 +1,17 @@
+{
+  "name": "ball-battle-arena",
+  "version": "1.0.0",
+  "description": "AI小球观战对战游戏 - 单人单机自动战斗",
+  "main": "server/server.js",
+  "scripts": {
+    "start": "node server/server.js",
+    "dev": "node server/server.js"
+  },
+  "keywords": ["game", "ai", "battle", "websocket"],
+  "author": "",
+  "license": "MIT",
+  "dependencies": {
+    "express": "^4.18.2",
+    "ws": "^8.14.2"
+  }
+}

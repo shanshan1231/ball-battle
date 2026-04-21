@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>英雄对决</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <div class="container">
+        <!-- 标题区域 -->
+        <header class="header">
+            <h1>⚔️ 英雄对决 ⚔️</h1>
+            <p class="subtitle">选择你的两位出战英雄，观看AI自动对战！</p>
+        </header>
+
+        <!-- 角色选择区域 -->
+        <div class="selection-area">
+            <!-- 已选角色展示 -->
+            <div class="selected-display">
+                <div class="selected-slot" id="slotA">
+                    <div class="slot-label">对战单位 A</div>
+                    <div class="slot-content">
+                        <span class="placeholder">请选择</span>
+                    </div>
+                </div>
+                <div class="vs-text">VS</div>
+                <div class="selected-slot" id="slotB">
+                    <div class="slot-label">对战单位 B</div>
+                    <div class="slot-content">
+                        <span class="placeholder">请选择</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 角色卡片列表 -->
+            <div class="hero-list" id="heroList">
+                <!-- 近战刀战士 -->
+                <div class="hero-card" data-class="melee">
+                    <div class="hero-ball melee">
+                        <div class="weapon-icon">🗡️</div>
+                    </div>
+                    <div class="hero-info">
+                        <h3>近战刀战士</h3>
+                        <p class="hero-desc">近身自动寻敌，刀系近战斩击攻击，伤害高、血量偏高、攻击范围小</p>
+                        <div class="hero-stats">
+                            <span class="stat hp">❤️ 1100</span>
+                            <span class="stat atk">⚔️ 22</span>
+                            <span class="stat spd">💨 中</span>
+                        </div>
+                    </div>
+                    <div class="select-badge A">选A</div>
+                    <div class="select-badge B">选B</div>
+                </div>
+
+                <!-- 远程弓手 -->
+                <div class="hero-card" data-class="archer">
+                    <div class="hero-ball archer">
+                        <div class="weapon-icon">🏹</div>
+                    </div>
+                    <div class="hero-info">
+                        <h3>远程弓手</h3>
+                        <p class="hero-desc">自动发射弓箭远程攻击，保持距离拉扯AI行为，伤害中等、血量偏低</p>
+                        <div class="hero-stats">
+                            <span class="stat hp">❤️ 850</span>
+                            <span class="stat atk">🏹 20</span>
+                            <span class="stat spd">💨 快</span>
+                        </div>
+                    </div>
+                    <div class="select-badge A">选A</div>
+                    <div class="select-badge B">选B</div>
+                </div>
+
+                <!-- 盾牌手 -->
+                <div class="hero-card" data-class="shield">
+                    <div class="hero-ball shield">
+                        <div class="weapon-icon">🛡️</div>
+                    </div>
+                    <div class="hero-info">
+                        <h3>盾牌手</h3>
+                        <p class="hero-desc">自带盾牌，可格挡并反弹所有远程弹道攻击，血量最高、防御最强</p>
+                        <div class="hero-stats">
+                            <span class="stat hp">❤️ 1200</span>
+                            <span class="stat atk">🛡️ 18</span>
+                            <span class="stat spd">💨 慢</span>
+                        </div>
+                    </div>
+                    <div class="select-badge A">选A</div>
+                    <div class="select-badge B">选B</div>
+                </div>
+
+                <!-- 法师 -->
+                <div class="hero-card" data-class="mage">
+                    <div class="hero-ball mage">
+                        <div class="weapon-icon">🔮</div>
+                    </div>
+                    <div class="hero-info">
+                        <h3>法师</h3>
+                        <p class="hero-desc">远程释放法术法球技能，带有法术特效，爆发高、血量低、技能冷却长</p>
+                        <div class="hero-stats">
+                            <span class="stat hp">❤️ 800</span>
+                            <span class="stat atk">✨ 22</span>
+                            <span class="stat spd">💨 中</span>
+                        </div>
+                    </div>
+                    <div class="select-badge A">选A</div>
+                    <div class="select-badge B">选B</div>
+                </div>
+
+                <!-- 奶妈 -->
+                <div class="hero-card" data-class="healer">
+                    <div class="hero-ball healer">
+                        <div class="weapon-icon">💚</div>
+                    </div>
+                    <div class="hero-info">
+                        <h3>奶妈</h3>
+                        <p class="hero-desc">拥有基础小额攻击能力，战斗中自动回血，自身续航能力强，攻击力较弱</p>
+                        <div class="hero-stats">
+                            <span class="stat hp">❤️ 950</span>
+                            <span class="stat atk">💚 15</span>
+                            <span class="stat spd">💨 中</span>
+                        </div>
+                    </div>
+                    <div class="select-badge A">选A</div>
+                    <div class="select-badge B">选B</div>
+                </div>
+
+                <!-- 李信 -->
+                <div class="hero-card" data-class="lixin">
+                    <div class="hero-ball lixin">
+                        <div class="hero-img" style="width:100%;height:100%;border-radius:50%;overflow:hidden;">
+                            <img src="../image/李信.png" style="width:100%;height:100%;object-fit:cover;" alt="李信">
+                        </div>
+                    </div>
+                    <div class="hero-info">
+                        <h3>李信</h3>
+                        <p class="hero-desc">王者荣耀英雄！蓄力位移突进，位移命中敌人造成伤害，之后获得远程平A</p>
+                        <div class="hero-stats">
+                            <span class="stat hp">❤️ 950</span>
+                            <span class="stat atk">⚔️ 35</span>
+                            <span class="stat spd">💨 蓄力</span>
+                        </div>
+                    </div>
+                    <div class="select-badge A">选A</div>
+                    <div class="select-badge B">选B</div>
+                </div>
+
+                <!-- 后羿 -->
+                <div class="hero-card" data-class="houyi">
+                    <div class="hero-ball houyi">
+                        <div class="hero-img" style="width:100%;height:100%;border-radius:50%;overflow:hidden;">
+                            <img src="../image/后羿.png" style="width:100%;height:100%;object-fit:cover;" alt="后羿">
+                        </div>
+                    </div>
+                    <div class="hero-info">
+                        <h3>后羿</h3>
+                        <p class="hero-desc">平A射出三连箭矢，伤害高但血量较低，每秒可发射一次三连箭</p>
+                        <div class="hero-stats">
+                            <span class="stat hp">❤️ 850</span>
+                            <span class="stat atk">🏹 14×3</span>
+                            <span class="stat spd">💨 快</span>
+                        </div>
+                    </div>
+                    <div class="select-badge A">选A</div>
+                    <div class="select-badge B">选B</div>
+                </div>
+
+                <!-- 西施 -->
+                <div class="hero-card" data-class="xishi">
+                    <div class="hero-ball xishi">
+                        <div class="hero-img" style="width:100%;height:100%;border-radius:50%;overflow:hidden;">
+                            <img src="../image/西施.png" style="width:100%;height:100%;object-fit:cover;" alt="西施">
+                        </div>
+                    </div>
+                    <div class="hero-info">
+                        <h3>西施</h3>
+                        <p class="hero-desc">释放法球攻击敌人，法球飞行一段距离后停止，停留4秒并持续造成伤害</p>
+                        <div class="hero-stats">
+                            <span class="stat hp">❤️ 850</span>
+                            <span class="stat atk">✨ 100+10×2/s+150</span>
+                            <span class="stat spd">💨 中</span>
+                        </div>
+                    </div>
+                    <div class="select-badge A">选A</div>
+                    <div class="select-badge B">选B</div>
+                </div>
+            </div>
+
+            <!-- 开始战斗按钮 + 音效测试 -->
+            <div class="action-buttons">
+                <button id="soundTestBtn" class="btn btn-secondary">🔊 音效测试</button>
+                <button id="startBattleBtn" class="btn btn-primary" disabled>
+                    🚀 开始对战
+                </button>
+            </div>
+
+            <!-- 提示信息 -->
+            <p class="hint">💡 点击「选A」选择第一位英雄，再点击「选B」选择第二位英雄</p>
+        </div>
+    </div>
+
+    <script src="js/main.js"></script>
+</body>
+</html>

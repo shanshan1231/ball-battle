@@ -1,0 +1,9 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(node --check server/Ball.js)",
+      "Bash(node --check server/Game.js)",
+      "Bash(node --check server/server.js)"
+    ]
+  }
+}
