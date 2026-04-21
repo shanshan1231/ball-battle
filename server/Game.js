@@ -7,10 +7,14 @@
 const Ball = require('./Ball');
 
 class Game {
-    constructor(ballAClass, ballBClass) {
-        // 场地配置（扩大10%）
-        this.arenaWidth = 704;
-        this.arenaHeight = 704;
+    constructor(ballAClass, ballBClass, config) {
+        // 保存配置
+        this.config = config;
+        this.heroConfigs = config ? config.heroes : {};
+
+        // 场地配置
+        this.arenaWidth = config && config.arena ? config.arena.width : 704;
+        this.arenaHeight = config && config.arena ? config.arena.height : 704;
 
         // 游戏状态
         this.isOver = false;
@@ -24,11 +28,11 @@ class Game {
         this.gameOverTime = 0;
 
         // 创建两个小球
-        this.ballA = new Ball(ballAClass, 'A', this);
+        this.ballA = new Ball(ballAClass, 'A', this, this.heroConfigs);
         this.ballA.x = 200;
         this.ballA.y = this.arenaHeight / 2;
 
-        this.ballB = new Ball(ballBClass, 'B', this);
+        this.ballB = new Ball(ballBClass, 'B', this, this.heroConfigs);
         this.ballB.x = this.arenaWidth - 200;
         this.ballB.y = this.arenaHeight / 2;
 
@@ -49,7 +53,7 @@ class Game {
         this.collisionForce = 0.8;
         this.minSpeed = 1.5;
 
-        this.log(`🎮 游戏创建: ${Ball.CLASS_CONFIGS[ballAClass].name} VS ${Ball.CLASS_CONFIGS[ballBClass].name}`);
+        this.log(`🎮 游戏创建: ${this.heroConfigs[ballAClass]?.name || ballAClass} VS ${this.heroConfigs[ballBClass]?.name || ballBClass}`);
     }
 
     /**
@@ -317,7 +321,7 @@ class Game {
 
                     this.addEffect('shield_block', target.x, target.y);
                     this.playSound('shield_block');
-                    this.log(`🛡️ ${Ball.CLASS_CONFIGS[target.classType].name}反弹了${proj.type === 'arrow' ? '箭矢' : '法球'}！`);
+                    this.log(`🛡️ ${this.heroConfigs[target.classType]?.name || target.classType}反弹了${proj.type === 'arrow' ? '箭矢' : '法球'}！`);
                 }
             }
         }
@@ -521,8 +525,8 @@ class Game {
         this.playSound('death');
 
         this.log('═══════════════════════════════════');
-        this.log(`🏆 游戏结束！胜利者: ${Ball.CLASS_CONFIGS[winner.classType].name}(${winner.side}方)`);
-        this.log(`💀 失败者: ${Ball.CLASS_CONFIGS[loser.classType].name}(${loser.side}方)`);
+        this.log(`🏆 游戏结束！胜利者: ${this.heroConfigs[winner.classType]?.name || winner.classType}(${winner.side}方)`);
+        this.log(`💀 失败者: ${this.heroConfigs[loser.classType]?.name || loser.classType}(${loser.side}方)`);
         this.log('═══════════════════════════════════');
 
         if (this.gameOverCallback) {
@@ -541,25 +545,25 @@ class Game {
                 timestamp: new Date().toLocaleString(),
                 winner: {
                     classType: winner.classType,
-                    name: Ball.CLASS_CONFIGS[winner.classType].name,
+                    name: this.heroConfigs[winner.classType]?.name || winner.classType,
                     side: winner.side,
                     hp: winner.hp,
                     maxHp: winner.maxHp
                 },
                 loser: {
                     classType: loser.classType,
-                    name: Ball.CLASS_CONFIGS[loser.classType].name,
+                    name: this.heroConfigs[loser.classType]?.name || loser.classType,
                     side: loser.side,
                     hp: loser.hp,
                     maxHp: loser.maxHp
                 },
                 ballA: {
                     classType: this.ballA.classType,
-                    name: Ball.CLASS_CONFIGS[this.ballA.classType].name
+                    name: this.heroConfigs[this.ballA.classType]?.name || this.ballA.classType
                 },
                 ballB: {
                     classType: this.ballB.classType,
-                    name: Ball.CLASS_CONFIGS[this.ballB.classType].name
+                    name: this.heroConfigs[this.ballB.classType]?.name || this.ballB.classType
                 }
             };
             history.unshift(record);

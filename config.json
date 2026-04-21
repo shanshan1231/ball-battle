@@ -12,7 +12,7 @@
       "radius": 55,
       "weaponEmoji": "🗡️",
       "sound": "melee_attack",
-      "enabled": true
+      "enabled": false
     },
     "archer": {
       "name": "远程弓手",
@@ -40,7 +40,7 @@
       "radius": 60,
       "weaponEmoji": "🛡️",
       "sound": "shield_attack",
-      "enabled": true
+      "enabled": false
     },
     "mage": {
       "name": "法师",
@@ -54,7 +54,7 @@
       "radius": 55,
       "weaponEmoji": "🔮",
       "sound": "mage_attack",
-      "enabled": true
+      "enabled": false
     },
     "healer": {
       "name": "奶妈",
@@ -68,16 +68,16 @@
       "radius": 55,
       "weaponEmoji": "💚",
       "sound": "healer_attack",
-      "enabled": true
+      "enabled": false
     },
     "lixin": {
       "name": "李信",
-      "description": "王者荣耀英雄！蓄力位移突进，位移命中敌人造成伤害，之后获得远程平A",
+      "description": "蓄力位移突进，位移命中敌人造成伤害，之后获得远程平A",
       "color": "#8e44ad",
       "hp": 950,
-      "attack": 35,
+      "attack": 50,
       "attackRange": 180,
-      "attackCooldown": 2500,
+      "attackCooldown": 1500,
       "speed": 3.5,
       "radius": 55,
       "weaponEmoji": "⚔️",
@@ -85,7 +85,7 @@
       "chargeTime": 1200,
       "dashDistance": 250,
       "dashSpeed": 12,
-      "cooldownTime": 2500,
+      "cooldownTime": 1500,
       "enabled": true
     },
     "houyi": {

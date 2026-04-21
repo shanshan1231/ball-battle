@@ -145,12 +145,14 @@ class Ball {
      * @param {string} classType - 职业类型
      * @param {string} side - 阵营 ('A' 或 'B')
      * @param {Game} game - 所属游戏实例
+     * @param {Object} heroConfigs - 英雄配置（从配置文件读取）
      */
-    constructor(classType, side, game) {
+    constructor(classType, side, game, heroConfigs) {
         this.classType = classType;
         this.side = side;
         this.game = game;
-        this.classConfig = CLASS_CONFIGS[classType] || CLASS_CONFIGS.melee;
+        // 优先使用传入的配置，否则使用硬编码的默认值
+        this.classConfig = heroConfigs[classType] || CLASS_CONFIGS[classType] || CLASS_CONFIGS.melee;
 
         // ==================== 基础属性 ====================
         this.x = 0;
@@ -618,7 +620,7 @@ class Ball {
         this.game.addEffect('hit', this.x, this.y, source);
         this.game.addEffect('damage_number', this.x, this.y - this.radius - 20, source, damage);
 
-        this.game.log(`💥 ${this.side}方(${CLASS_CONFIGS[this.classType].name})受到${damage}伤害！剩余血量:${Math.max(0, this.hp)}/${this.maxHp}`);
+        this.game.log(`💥 ${this.side}方(${this.classConfig.name})受到${damage}伤害！剩余血量:${Math.max(0, this.hp)}/${this.maxHp}`);
 
         if (this.isSlowed) {
             this.game.log(`⏱️ ${this.side}方移速降低50%，持续500ms`);
@@ -779,7 +781,7 @@ class Ball {
         return {
             side: this.side,
             classType: this.classType,
-            className: CLASS_CONFIGS[this.classType].name,
+            className: this.classConfig.name,
             color: this.color,
             x: this.x,
             y: this.y,

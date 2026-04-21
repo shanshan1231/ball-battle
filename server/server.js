@@ -141,7 +141,9 @@ function startNewGame(ballAClass, ballBClass) {
         gameLoopInterval = null;
     }
 
-    currentGame = new Game(ballAClass, ballBClass);
+    // 每次创建游戏时重新加载配置
+    loadConfig();
+    currentGame = new Game(ballAClass, ballBClass, gameConfig);
     currentGame.setSpeed(gameSpeed);  // 应用当前速度
 
     // 游戏结束回调
@@ -209,6 +211,10 @@ function sendToClient(data) {
 }
 
 function getClassName(classType) {
+    // 优先从配置读取名称
+    if (gameConfig && gameConfig.heroes && gameConfig.heroes[classType]) {
+        return gameConfig.heroes[classType].name;
+    }
     const names = {
         'melee': '近战刀战士',
         'archer': '远程弓手',
